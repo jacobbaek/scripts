@@ -10,10 +10,7 @@ INST_VELERO="no"
 DEBUG="no"
 
 set -e
-
-if [[ $DEBUG == "yes" ]]; then
-    set -x
-fi
+set -x
 
 ## https://rancher.com/docs/k3s/latest/en/installation/install-options/
 # install K3s
