@@ -7,7 +7,6 @@
 # check the OS-distribution
 OSDIST=`cat /etc/os-release | grep "^PRETTY_NAME=" | awk -F\" '{print $2}'`
 INST_VELERO="no"
-DEBUG="no"
 
 set -e
 set -x
