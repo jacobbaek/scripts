@@ -22,7 +22,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXE="--no-deploy trafik" sh -
 # prepare helm
 curl -L https://get.helm.sh/helm-v3.5.3-linux-amd64.tar.gz | tar xvfz -
 cp linux-amd64/helm /usr/local/bin
-rm -f linux-amd64
+rm -rf linux-amd64
 
 # kubectl 
 kubectl get nodes
