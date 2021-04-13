@@ -11,7 +11,7 @@ DEBUG="no"
 
 set -e
 
-if [[ $DEBUG == "yes" ]]; then
+if [ $DEBUG == "yes" ]; then
     set -x
 fi
 
@@ -54,7 +54,7 @@ helm install longhorn longhorn/longhorn -n longhorn-system \
  --set defaultSettings.defaultDataLocality="best-effort"
 
 # velero
-if [[ $INST_VELERO == "yes" ]]; then
+if [ $INST_VELERO == "yes" ]; then
     curl -L https://github.com/vmware-tanzu/velero/releases/download/v1.5.4/velero-v1.5.4-linux-amd64.tar.gz | tar xvzf -
     cp velero-v1.5.4-linux-amd64/velero /usr/local/bin
 fi
