@@ -9,7 +9,10 @@ OSDIST=`cat /etc/os-release | grep "^PRETTY_NAME=" | awk -F\" '{print $2}'`
 INST_VELERO="no"
 
 set -e
-set -x
+
+if [[ $DEBUG == "yes" ]]; then
+    set -x
+fi
 
 ## https://rancher.com/docs/k3s/latest/en/installation/install-options/
 # install K3s
