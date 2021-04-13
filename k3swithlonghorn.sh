@@ -4,6 +4,10 @@
 # install kubernetes as oneline
 #
 
+# check the OS-distribution
+OSDIST=`cat /etc/os-release | grep "^PRETTY_NAME=" | awk -F\" '{print $2}'`
+INST_VELERO="false"
+
 ## https://rancher.com/docs/k3s/latest/en/installation/install-options/
 # install K3s
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXE="--no-deploy trafik" sh -
@@ -24,6 +28,17 @@ kubectl delete configmap/local-path-config
 kubectl delete secret/
 
 # longhorn
+
+if [[ $OSDIST == *"CentOS"* ]]; then
+    yum install iscsi-initiator-utils -y
+elif [[ $OSDIST == *"Ubuntu"* ]];then
+    apt-get update
+    apt install open-iscsi -y
+else
+    echo "only support centos and ubuntu OS distribution"
+    exit 1
+fi
+
 helm repo add longhorn https://charts.longhorn.io 
 helm repo update 
 kubectl create ns longhorn-system 
@@ -32,5 +47,7 @@ helm install longhorn longhorn/longhorn -n longhorn-system \
  --set defaultSettings.defaultDataLocality="best-effort"
 
 # velero
-curl -L https://github.com/vmware-tanzu/velero/releases/download/v1.5.4/velero-v1.5.4-linux-amd64.tar.gz | tar xvzf -
-cp velero-v1.5.4-linux-amd64/velero /usr/local/bin
+if [[ $INST_VELERO == "yes" ]]; then
+    curl -L https://github.com/vmware-tanzu/velero/releases/download/v1.5.4/velero-v1.5.4-linux-amd64.tar.gz | tar xvzf -
+    cp velero-v1.5.4-linux-amd64/velero /usr/local/bin
+fi
