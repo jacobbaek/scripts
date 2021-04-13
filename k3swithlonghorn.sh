@@ -36,10 +36,10 @@ kubectl delete secret/
 # longhorn
 
 if [[ $OSDIST == *"CentOS"* ]]; then
-    yum install iscsi-initiator-utils -y
+    sudo yum install iscsi-initiator-utils -y
 elif [[ $OSDIST == *"Ubuntu"* ]];then
-    apt-get update
-    apt install open-iscsi -y
+    sudo apt-get update
+    sudo apt install open-iscsi -y
 else
     echo "only support centos and ubuntu OS distribution"
     exit 1
