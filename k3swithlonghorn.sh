@@ -37,7 +37,7 @@ if [[ ! -d "/root/.kube" ]]; then
 fi
 kubectl get nodes
 
-# delete local-path
+# delete local-path-provisioner
 kubectl delete deploy/local-path-provisioner -n kube-system
 kubectl delete sc/local-path
 kubectl delete configmap/local-path-config -n kube-system
@@ -61,6 +61,13 @@ kubectl create ns longhorn-system
 helm install longhorn longhorn/longhorn -n longhorn-system \
  --set defaultSettings.defaultDataPath="/data/longhorn" \
  --set defaultSettings.defaultDataLocality="best-effort"
+
+while [[ $RET -eq 1 ]]
+do
+  kubectl get nodes | grep Ready
+  RET=$?
+  sleep 1
+done
 
 # velero
 if [[ $INST_VELERO == "yes" ]]; then
