@@ -29,7 +29,8 @@ curl -L https://get.helm.sh/helm-v3.5.3-linux-amd64.tar.gz | tar xvfz -
 cp linux-amd64/helm /usr/local/bin
 rm -rf linux-amd64
 
-# kubectl 
+# kubectl
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 mkdir /root/.kube/
 cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
 kubectl get nodes
