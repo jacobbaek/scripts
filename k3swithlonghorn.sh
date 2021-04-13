@@ -37,7 +37,7 @@ kubectl get nodes
 # delete local-path
 kubectl delete deploy/local-path-provisioner -n kube-system
 kubectl delete sc/local-path
-kubectl delete configmap/local-path-config
+kubectl delete configmap/local-path-config -n kube-system
 #kubectl delete secret/local-path-provisioner-service-account-token-xxxxx -n kube-system
 
 # longhorn
