@@ -25,14 +25,14 @@ cp linux-amd64/helm /usr/local/bin
 rm -rf linux-amd64
 
 # kubectl 
-kubectl get nodes
 cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
+kubectl get nodes
 
 # delete local-path
 kubectl delete deploy/local-path-provisioner -n kube-system
 kubectl delete sc/local-path
 kubectl delete configmap/local-path-config
-kubectl delete secret/
+#kubectl delete secret/local-path-provisioner-service-account-token-xxxxx -n kube-system
 
 # longhorn
 
