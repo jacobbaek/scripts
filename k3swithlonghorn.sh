@@ -31,8 +31,10 @@ rm -rf linux-amd64
 
 # kubectl
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-mkdir /root/.kube/
-cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
+if [[ ! -d "/root/.kube" ]];
+    mkdir /root/.kube/
+    cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
+fi
 kubectl get nodes
 
 # delete local-path
