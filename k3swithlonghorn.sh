@@ -15,6 +15,11 @@ if [[ "$DEBUG" == "yes" ]]; then
     set -x
 fi
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
 ## https://rancher.com/docs/k3s/latest/en/installation/install-options/
 # install K3s
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXE="--no-deploy trafik" sh -
@@ -25,6 +30,7 @@ cp linux-amd64/helm /usr/local/bin
 rm -rf linux-amd64
 
 # kubectl 
+mkdir /root/.kube/
 cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
 kubectl get nodes
 
