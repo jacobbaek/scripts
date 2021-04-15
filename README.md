@@ -2,5 +2,5 @@
 
 # How to do
 ```
-curl -sLf https://raw.githubusercontent.com/jacobbaek/scripts/master/k3swithlonghorn.sh | sh -
+curl -sLf https://raw.githubusercontent.com/jacobbaek/scripts/master/k3swithlonghorn.sh | bash -
 ```
