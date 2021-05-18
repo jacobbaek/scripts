@@ -59,6 +59,10 @@ function install_k3s() {
   cp /tmp/k9s/k9s /usr/local/bin
   rm -rf /tmp/k9s
 
+  # jq command
+  curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o /usr/local/bin/jq
+  chmod +x /usr/local/bin/jq
+
   # check the k3s becoming ready
   while [[ $RET -eq 1 ]]
   do
