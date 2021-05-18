@@ -53,6 +53,13 @@ function install_k3s() {
       cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
   fi
 
+  # k9s download
+  mkdir /tmp/k9s
+  curl -L https://github.com/derailed/k9s/releases/download/v0.24.9/k9s_Linux_x86_64.tar.gz | tar xvfz - -C /tmp/k9s
+  cp /tmp/k9s/k9s /usr/local/bin
+  rm -rf /tmp/k9s
+
+  # check the k3s becoming ready
   while [[ $RET -eq 1 ]]
   do
     kubectl get nodes | grep Ready
