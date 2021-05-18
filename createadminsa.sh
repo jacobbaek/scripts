@@ -1,10 +1,17 @@
 #!/bin/bash
 
 #
-#
+# create serviceaccount admin on kubernetes
 #
 
-ContextName="jacob"
+DEL="no"
+
+if [ $# -eq 0 ]; then
+  echo "No argument supplied"
+  exit 1
+fi 
+
+ContextName=$1
 
 function create_sa() {
   kubectl create sa $ContextName-sa
@@ -36,4 +43,14 @@ EOF
   kubectl config set-context $ContextName-context --cluster=$ContextName-cluster --user=$ContextName-user
 }
 
-create_sa
+function delete_sa {
+  kubectl delete sa $ContextName-sa
+  kubectl delete ClusterRoleBinding ${ContextName}-sa
+  kubectl config delete-context ${ContextName}-context
+}
+
+if [ $DEL == "yes" ]; then
+  delete_sa
+else
+  create_sa
+fi
