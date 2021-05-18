@@ -52,10 +52,6 @@ function install_k3s() {
       mkdir /root/.kube/
       cp /var/lib/rancher/k3s/server/cred/admin.kubeconfig /root/.kube/config
   fi
-  if [ ! `kubectl get nodes` -eq 0 ]; then
-    echo "k3s doesn't work"
-    exit 1
-  fi
 
   while [[ $RET -eq 1 ]]
   do
