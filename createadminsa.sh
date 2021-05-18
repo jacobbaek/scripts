@@ -4,14 +4,8 @@
 # create serviceaccount admin on kubernetes
 #
 
-DEL="no"
-
-if [ $# -eq 0 ]; then
-  echo "No argument supplied"
-  exit 1
-fi 
-
-ContextName=$1
+DelContext="no"
+ContextName="jacob"
 
 function create_sa() {
   kubectl create sa $ContextName-sa
