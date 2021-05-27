@@ -6,9 +6,19 @@
 
 # check the OS-distribution
 OSDIST=`cat /etc/os-release | grep "^PRETTY_NAME=" | awk -F\" '{print $2}'`
-INST_VELERO="no"
-INST_LONGHORN="yes"
-DEBUG="no"
+if [ "${INST_VELEO}" == "yes" ]; then
+  INST_VELERO="yes"
+fi
+
+if [ "${INST_LONGHORN}" == "no" ]; then
+  INST_LONGHORN="no"
+else
+  INST_LONGHORN="yes"
+fi
+
+if [ "${DEBUG}" == "yes" ]; then
+  DEBUG="yes"
+fi
 
 set -e
 
