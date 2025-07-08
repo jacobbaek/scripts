@@ -15,7 +15,7 @@ cat squid-ca-cert.pem squid-ca-key.pem >> squid-ca-cert-key.pem
 sudo mkdir /etc/squid/certs
 sudo mv squid-ca-cert-key.pem /etc/squid/certs/.
 
-cat << EOF >> /etc/squid/squid.conf
+cat << EOF > /etc/squid/squid.conf
 acl SSL_ports port 443
 #http_access deny !Safe_ports
 #http_access deny CONNECT !SSL_ports
@@ -49,7 +49,7 @@ echo "[INFO] Generating proxy.json file"
 
 TRUSTEDCA=$(cat /etc/squid/certs/squid-ca-cert-key.pem | base64 -w 0)
 
-CAT << EOF >> proxy.json
+CAT << EOF > proxy.json
 {
   "httpProxy": "http://<IP>:8888/",
   "httpsProxy": "https://<IP>:8899/",
@@ -59,3 +59,4 @@ CAT << EOF >> proxy.json
   ],
    "trustedCA": "${TRUSTEDCA}"
 }
+EOF
