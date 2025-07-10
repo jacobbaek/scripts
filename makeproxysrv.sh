@@ -49,7 +49,7 @@ echo "[INFO] Generating proxy.json file"
 
 TRUSTEDCA=$(cat /etc/squid/certs/squid-ca-cert-key.pem | base64 -w 0)
 
-CAT << EOF > proxy.json
+cat << EOF > proxy.json
 {
   "httpProxy": "http://<IP>:8888/",
   "httpsProxy": "https://<IP>:8899/",
