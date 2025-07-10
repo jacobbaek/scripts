@@ -10,7 +10,7 @@ sudo apt install squid -y
 # certificate
 echo ""
 echo "[INFO] Generating cert for squid server"
-openssl req -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -extensions v3_ca -keyout squid-ca-key.pem -out squid-ca-cert.pem
+openssl req -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -extensions v3_ca -keyout squid-ca-key.pem -out squid-ca-cert.pem -subj "/C=KR/ST=Seoul/L=Seoul/O=MyCompany/OU=IT/CN=$VISIBLENAME.io"
 cat squid-ca-cert.pem squid-ca-key.pem >> squid-ca-cert-key.pem
 sudo mkdir /etc/squid/certs
 sudo mv squid-ca-cert-key.pem /etc/squid/certs/.
