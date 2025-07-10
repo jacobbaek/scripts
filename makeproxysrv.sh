@@ -15,7 +15,7 @@ cat squid-ca-cert.pem squid-ca-key.pem >> squid-ca-cert-key.pem
 sudo mkdir /etc/squid/certs
 sudo mv squid-ca-cert-key.pem /etc/squid/certs/.
 
-cat << EOF > /etc/squid/squid.conf
+sudo cat << EOF > /etc/squid/squid.conf
 acl SSL_ports port 443
 #http_access deny !Safe_ports
 #http_access deny CONNECT !SSL_ports
