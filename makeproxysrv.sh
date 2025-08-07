@@ -15,7 +15,7 @@ cat squid-ca-cert.pem squid-ca-key.pem >> squid-ca-cert-key.pem
 sudo mkdir /etc/squid/certs
 sudo mv squid-ca-cert-key.pem /etc/squid/certs/.
 
-sudo cat << EOF > /etc/squid/squid.conf
+cat << EOF > /tmp/squid.conf
 acl SSL_ports port 443
 #http_access deny !Safe_ports
 #http_access deny CONNECT !SSL_ports
@@ -40,6 +40,7 @@ refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
 refresh_pattern .               0       20%     4320
 visible_hostname ${VISIBLENAME}
 EOF
+sudo mv /tmp/squid.conf /etc/squid/squid.conf
 
 sudo systemctl restart squid.service
 
