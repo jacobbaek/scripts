@@ -13,14 +13,19 @@ echo
 
 # ===== User Input =====
 
-read -r -p "Enter AKS node name: " NODE_NAME
+if [[ ! -r /dev/tty ]]; then
+    echo "[ERROR] Interactive terminal is required." >&2
+    exit 1
+fi
+
+read -r -p "Enter AKS node name: " NODE_NAME < /dev/tty
 
 if [[ -z "$NODE_NAME" ]]; then
     echo "[ERROR] Node name cannot be empty." >&2
     exit 1
 fi
 
-read -r -p "Enter source directory on the node (e.g. /var/log): " SOURCE_DIR
+read -r -p "Enter source directory on the node (e.g. /var/log): " SOURCE_DIR < /dev/tty
 
 if [[ -z "$SOURCE_DIR" ]]; then
     echo "[ERROR] Source directory cannot be empty." >&2
